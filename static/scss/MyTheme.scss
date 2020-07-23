@@ -1,0 +1,479 @@
+/* MyTheme Main Style Sheet
+
+Theme based on astrochelys with these changes:
+
+1. Use sass to clarify code.
+2. Remove pure.css framework since it isn't needed.
+3. Change color scheme to solarized and move all color styling to _colors.scss
+4. Change fonts and place in _typography.scss
+
+Questions
+
+1. Why so many divs wihtin divs? Can they be simplified? e.g. sidebar
+Changes remaining:
+
+2. Improve typography and fallback options
+3. Change tufte margin note symbol to dagger or double dagger
+4. Add Menu icon in mobile header
+5. Change font for katex
+6. Clean up scss to add comments and make better use of sass
+7. Add tufte features like fullwidth class, newthought
+
+Possible style changes:
+
+Changes to templates (here as a reminder):
+
+1. Redesign templates for overall structure (Books, chapters) or (Category, book, chapter)
+2. Redesign sidebar to just have link to colophon at bottom.
+3. Add category pages
+4. Nested categories?
+*/ 
+
+/* Typography */
+@use 'typography' as *;
+
+/* Color palette */
+@use 'colors' as *;
+
+/* Base CSS styles */
+body {
+ color: $body-text-color;
+ background-color: $body-bg-color;
+ font-family: $body-font-stack;
+ font-size: 1em;
+ margin:0
+}
+
+div {
+ display:block
+}
+
+.center-text {
+ text-align:center
+}
+.uppercase {
+ text-transform: uppercase
+}
+.condensed-font {
+ font-family: $condensed-font-stack;
+}
+/* Hyperlinks*/
+/* jaj - modified to underline, no color change. */
+/* a {
+    text-decoration: none;
+    border-bottom: 0.125em solid;
+} */
+a {
+    text-decoration: underline;
+}
+
+ /*color:var(--highlight-color-1);
+ font-weight: bold; */
+
+a:hover {
+ color: $body-highlight-color;
+ border-bottom:1px solid $body-highlight-color;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+ font-family:condensed-font-stack;
+ line-height: 1em;
+}
+h1 {font-size:2.5em}
+h2 {font-size:2em}
+h3 {font-size:1.8em}
+h4 {font-size:1.5em}
+h5 {font-size:1.2em}
+h6 {font-size:1em}
+/* change size if small screen */
+@media screen and (max-width:48em) {
+    h1 {font-size:2em}
+    h2 {font-size:1.8em}
+    h3 {font-size:1.5em}
+    h4 {font-size:1.2em}
+    h5 {font-size:1em}
+    h6 {font-size:1em}
+}
+
+code {
+  background: $code-bg-color;
+  color: $code-text-color;
+  font-family: $code-font-stack;
+}
+pre, pre code {
+  background: $sidebar-bg-color;
+  font-family: $code-font-stack;
+  color: $code-text-color;
+  font-size:1em;
+  width: inherit;  
+  max-width: 100%; 
+  height: auto;   
+  padding:10px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  display: inline-block;
+  overflow-x:auto;
+  -webkit-text-size-adjust:none
+}
+
+.sourceCode {
+    background: $sidebar-bg-color;
+}
+
+img {
+  width: inherit;  
+  max-width: 100%; 
+  height: auto;   
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+blockquote{
+  font-size: 1em;
+  width: 95%;
+  margin: 1em auto;
+  font-family: inherit;
+  font-style: italic;
+  color: blockquote-text-color;
+  padding: 1em 2em 1em 3em;
+  border-left: 1em solid $border-color;
+  position: relative;
+  background: $blockquote-bg-color;
+}
+
+blockquote::before{
+  font-family: $body-font-stack;
+  content: "\201C";
+  color: $blockquote-highlight-color;
+  font-size:4em;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+blockquote::after{
+  content: '';
+}
+
+/* horizontal rules */
+hr {
+ border:0;
+ border-top:1px solid $border-color;
+ margin:0.4em 0
+}
+
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:30px;
+   font-weight: 0.5em;
+   text-align: center;
+}
+
+/* comments on https://out-of-cheese-error.netlify.app/astrochelys#orgcf4bba5_1 end here */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/* #layout {
+    padding: 0;
+} */
+
+/* from https://stackoverflow.com/questions/14436800/two-divs-next-to-each-other-that-then-stack-with-responsive-change */ 
+
+#layout { 
+    border : 2px solid $border-color; 
+    //overflow:hidden;
+  }
+  
+
+.sidebar {
+    background: $sidebar-bg-color;
+    color: $sidebar-text-color;
+    font-family: $headings-font-stack;
+    width: 20%;
+}
+.sitename {
+    font-family: $sitename-font-stack;
+    font-size: 1.3em;
+}
+.sidebar a {
+    font-weight: normal;
+    border: 2em;
+}
+.sidebar li a:hover, .sidebar .toc a:hover {
+    color: $sidebar-highlight-color;
+}
+.sidebar li a, .sidebar .toc a {
+    color: $sidebar-text-color;
+}
+.sidebar li {
+    line-height: 1.5em;
+    border-left: 1px;
+    padding: 0 4px 0 4px;
+    margin: 0 0 4px -4px;
+}
+.sidebar-content {
+    margin: 5%;
+    width: 90%;
+    padding: 1.5em;
+    text-align: left;
+    font-size: 1em;
+}
+.sidebar-header {
+    margin: 5%;
+    width: 90%;
+    padding: 0.5em;
+    text-align: center;
+    font-size: 1em;
+}
+.sidebar ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    font-size: 90%;
+}
+@media (min-width: 48em) {
+    .sidebar {
+           position: fixed;
+           top: 0;
+           bottom: 0;
+       }
+}
+
+@media (min-width: 48em) {
+    .phone-header {
+        display: none;
+    }
+}
+@media screen and (max-width: 48em) {
+    .sidebar {
+        display: none;
+    }
+    .phone-header {
+        display: block;
+        text-align: center;
+        background: $sidebar-bg-color;
+        color: $sidebar-text-color;
+        min-height: 3.5em;
+        position: relative;
+        padding: 1em;
+        font-size: 1em;
+        font-family: $condensed-font-stack;
+    }
+    .phone-header a {
+        font-weight: normal;
+        border: 0;
+    }
+}
+
+@media (min-width: 48em) {
+    .content {
+        padding: 1em 3.5em 0 3.5em;
+        margin-left: 20%;
+        width: 50%;
+    }
+}
+@media screen and (max-width:48em) {
+    .content {
+        padding: 2em 1em 0 1em;
+    }
+}
+.content p {
+    text-align: justify;
+}
+
+@media screen and (max-width:48em) {
+      .article-title {
+          word-wrap: break-word;
+          font-family: $condensed-font-stack;
+      }
+  }
+
+.article-information {
+    font-family: $condensed-font-stack;
+}
+.article-information-heading {
+    color: $body-highlight-color;
+}
+
+.list-of-tags {
+    font-family: $condensed-font-stack;
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+}
+.list-of-tags li {
+    float: left;
+    line-height: 1.5em;
+    margin: 0;
+}
+.list-of-tags a {
+    background: $body-bg-color;
+    border-radius: 3px;
+    color: $body-text-color;
+    margin: 2px;
+    padding: 0.1em 0.4em;
+    text-decoration: none;
+}
+.list-of-tags a span {
+    font-size: 0.8em;
+    vertical-align: super;
+}
+
+.body {
+    counter-reset: sidenote-counter;
+}
+.sidenote,
+.marginnote {
+    float: right;
+    clear: right;
+    margin-right: -70%;
+    width: 60%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 100%;
+    font-family: $body-font-stack;
+    vertical-align: baseline;
+    position: relative; 
+}
+.sidenote-number {
+    counter-increment: sidenote-counter; 
+}
+.sidenote-number:after,
+.sidenote:before {
+    font-family: $sidenote-font-stack;
+    position: relative;
+    vertical-align: baseline; 
+}
+.sidenote-number:after {
+    content: counter(sidenote-counter) "\00bb";
+    font-size: 100%;
+    top: -0.2em;
+}
+.sidenote:before {
+    content: counter(sidenote-counter) "\00bb ";
+    font-size: 100%;
+    top: -0.2em; 
+}
+blockquote .sidenote,
+blockquote .marginnote {
+    margin-right: -82%;
+    min-width: 59%;
+    text-align: left; 
+}
+.marginnote hr {
+  color: $border-color;
+}
+label.sidenote-number {
+    display: inline; 
+}
+label.margin-toggle:not(.sidenote-number) {
+    display: inline; 
+}
+input.margin-toggle {
+    display: none; 
+}
+label.sidenote-number {
+    display: inline; 
+}
+@media screen and (max-width:48em) {
+    label.margin-toggle:not(.sidenote-number) {
+        display: inline; 
+    }
+    .sidenote,
+    .marginnote {
+        display: none; 
+    }
+    .margin-toggle:checked + .sidenote,
+    .margin-toggle:checked + .marginnote {
+        display: block;
+        float: left;
+        left: 1em;
+        clear: both;
+        width: 95%;
+        margin: 1em 2.5%;
+        vertical-align: baseline;
+        position: relative; 
+    }
+    label {
+        cursor: pointer; 
+    }
+}
+@media print {
+ .marginnote,
+ .sidenote {
+  font-size:80%;
+ }
+}
+
+/* .fullwidth and .newthought Tufte class styling */ 
+
+figure.fullwidth figcaption {
+    margin-right: 24%;
+}
+
+div.fullwidth,
+table.fullwidth {
+    width: 100%;
+}
+
+pre.fullwidth > code {
+    width: 90%;
+}
+
+.fullwidth {
+    max-width: 90%;
+    clear:both;
+}
+
+span.newthought {
+    font-variant: small-caps;
+    font-size: 1.2em;
+}
+
+pre.fullwidth > code {
+    width: 90%;
+}
+
+.fullwidth {
+    max-width: 90%;
+    clear:both;
+}
+
+span.newthought {
+    font-variant: small-caps;
+    font-size: 1.2em;
+}
+
+/* Chapter Epigraphs */
+div.epigraph {
+    margin: 5em 0;
+}
+
+div.epigraph > blockquote {
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
+div.epigraph > blockquote,
+div.epigraph > blockquote > p {
+    font-style: italic;
+}
+
+div.epigraph > blockquote > footer {
+    font-style: normal;
+}
+
+div.epigraph > blockquote > footer > cite {
+    font-style: italic;
+}
+/* end chapter epigraphs styles */
