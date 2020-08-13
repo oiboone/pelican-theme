@@ -25,8 +25,7 @@ Changes to templates (here as a reminder):
 
 1. Redesign templates for overall structure (Books, chapters) or (Category, book, chapter)
 2. Redesign sidebar to just have link to colophon at bottom.
-3. Add category pages
-4. Nested categories?
+3. Nested categories?
 */ 
 
 /* Typography */
@@ -127,7 +126,7 @@ pre, pre code {
 }
 
 img {
-  width: inherit;  
+//  width: inherit;  
   max-width: 100%; 
   height: auto;   
   margin-top: 0.5em;
@@ -169,7 +168,8 @@ hr {
 }
 
 #footer {
-   position:absolute;
+   clear: both;
+   position:relative; // was absolute changed so footer wouldn't overlap text;
    bottom:0;
    width:100%;
    height:30px;
@@ -183,24 +183,15 @@ hr {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-/* #layout {
-    padding: 0;
-} */
-
-/* from https://stackoverflow.com/questions/14436800/two-divs-next-to-each-other-that-then-stack-with-responsive-change */ 
-
-#layout { 
-    border : 2px solid $border-color; 
-    //overflow:hidden;
-  }
-  
 
 .sidebar {
     background: $sidebar-bg-color;
     color: $sidebar-text-color;
     font-family: $headings-font-stack;
     width: 20%;
+    overflow: auto;
 }
+
 .sitename {
     font-family: $sitename-font-stack;
     font-size: 1.3em;
@@ -290,6 +281,7 @@ hr {
 .content p {
     text-align: justify;
 }
+
 
 @media screen and (max-width:48em) {
       .article-title {
@@ -417,24 +409,67 @@ label.sidenote-number {
 
 /* .fullwidth and .newthought Tufte class styling */ 
 
-figure.fullwidth figcaption {
+/* figure .fullwidth figcaption {
     margin-right: 24%;
 }
+ */
 
-div.fullwidth,
+/* div.fullwidth,
+figure.fullwidth
 table.fullwidth {
-    width: 100%;
-}
+//    width: 100%;
+    padding: 1em 1em 0 3.5em;
+    margin-left: 0;
+    margin-right: -20vw;
+    width: 70vw;
+    color: $red;
+} 
 
 pre.fullwidth > code {
     width: 90%;
+} */ 
+@media (min-width: 48em) {
+    .fullwidth {
+        clear: both;
+        padding: 1em 1em 0 3.5em;
+        margin-left: 0;
+        margin-right: -20vw;
+        width: 60vw;
+    }
 }
+/* @media screen and (max-width: 48em) {
+    .fullwidth {
+        clear: both;
+        padding: 1em 1em 0 3.5em;
+        margin-left: 0;
+        margin-right: -20vw;
+        width: 60vw;
+    } */
+/* .fullwidth {
+    clear: both;
+    padding: 1em 1em 0 3.5em;
+    margin-left: 0;
+    margin-right: -20vw;
+//    margin-right: -70%;
+//    width: 60%;
 
-.fullwidth {
-    max-width: 90%;
+    width: 60vw;
+    } */
+/*    max-width: 90%;
     clear:both;
+} */
+
+.fullwidth .right {
+    text-align: right;
+    float: right;
 }
 
+.fullwidth .left {
+    text-align: left;
+    float: left;
+}
+
+/* 
 span.newthought {
     font-variant: small-caps;
     font-size: 1.2em;
@@ -444,10 +479,10 @@ pre.fullwidth > code {
     width: 90%;
 }
 
-.fullwidth {
+/* .fullwidth {
     max-width: 90%;
     clear:both;
-}
+} */ 
 
 span.newthought {
     font-variant: small-caps;

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+{{ category.title}} 
+{% endblock title %}
+{% block head %}
+{{ super() }}
+{% endblock head %}
+
+
+{% block content %}
+<section id="content" class="body">
+    {{category.description}}
+    <hr>
+</section>
+
+{% endblock %}

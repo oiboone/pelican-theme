@@ -2,15 +2,19 @@
 {% block title %}
 {{ category.title}} 
 {% endblock title %}
-{% block head %}
-{{ super() }}
-{% endblock head %}
 
+{% block toc %}
+    {% for art in articles |selectattr("series") |sort(attribute="series.name,series_index") %} 
+        <a href="{{ SITEURL }}/{{ art.url }}">{{art.title}} </a> <br>
+    {% endfor %}
+    {% for art in articles if not art.series %}
+        <a href="{{ SITEURL }}/{{ art.url }}">{{art.title}} </a> <br>
+    {% endfor %}
+{% endblock toc %}
 
 {% block content %}
-<section id="content" class="body">
-    {{category.description}}
-    <hr>
-</section>
-
+    {{category.title}}
+    <section id="content" class="body">
+        {{category.description}}
+    </section>
 {% endblock %}

@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Categories{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock head %}
 
 {% block toc %}
-  <div class="uppercase">Categories</div>
-  <hr>
-  <div>
-    {% for category, articles in categories %}
-    {# <a href="{{ SITEURL }}/{{ CATEGORIES_URL|default('categories.html') }}#{{ category }}-ref">{{ category }}</a><br> #}
-    <a href="{{ category.url }}">{{ category }}</a><br>
-    {% endfor %}
-  </div>
+<div class="uppercase">Categories</div>
+<hr>
+<div>
+{% for category, articles in categories %}
+<a href="{{ SITEURL }}/{{ CATEGORIES_URL|default('categories.html') }}#{{ category }}-ref">{{ category }}</a><br>
+{% endfor %}
+</div>
 {% endblock toc %}
 
 {% block content %}
@@ -20,9 +22,9 @@
 <div>
   <h3>
     {% set num = articles|count %}
-    {{ category }} ({{ num }} articles)
+    {{ category }} ({{ num }})
   </h3>
-  {# <div id="{{ category.slug }}-ref">
+  <div id="{{ category.slug }}-ref">
     {{category.description}}
     {% for article in articles %}
     <div class="marginnote">
@@ -38,8 +40,8 @@
       {{ article.subtitle }}
       {% endif %}
     </div>
-    {% endfor %} 
-  </div> #}
+    {% endfor %}
+  </div>
 </div>
 {% endfor %}
 {% endblock content %}
